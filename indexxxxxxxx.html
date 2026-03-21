@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>МИР ДОНОРОВ | Премиальный сервис для доноров крови</title>
+    <meta name="description" content="Стань донором крови в Москве. Выплаты до 12 155 ₽ за тромбоциты, 2 выходных дня, льготы почётного донора. Надёжно, прозрачно, человечно.">
+    
+    <!-- Шрифты: элегантный гротеск + акцентный -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Yandex.Metrika -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+        ym(107710428, 'init', { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/107710428" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Manrope', sans-serif;
+            background: #FDF8F5;
+            color: #1A120B;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Премиальная цветовая система */
+        :root {
+            --primary: #8B1A1A;
+            --primary-dark: #631212;
+            --primary-soft: #A53F3F;
+            --black-rich: #1A120B;
+            --gray-elegant: #4A3F3A;
+            --gray-light: #F0EBE6;
+            --bg-warm: #FDF8F5;
+            --card-white: #FFFFFF;
+            --shadow-sm: 0 12px 30px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 25px 45px -12px rgba(139, 26, 26, 0.2);
+            --border-radius-card: 32px;
+            --border-radius-element: 60px;
+        }
+
+        /* Глобальные улучшения */
+        img {
+            max-width: 100%;
+            display: block;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* ========== ЛОГОТИП (премиальная капля-мир) ========== */
+        .logo-premium {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-symbol {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary) 0%, #B33A3A 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 14px rgba(139, 26, 26, 0.25);
+            position: relative;
+        }
+        .logo-symbol::after {
+            content: "🩸";
+            font-size: 24px;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+        }
+        .logo-text {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .logo-text .mir {
+            font-size: 1.6rem;
+            color: var(--black-rich);
+            font-weight: 800;
+        }
+        .logo-text .donors {
+            font-size: 1.6rem;
+            color: var(--primary);
+            font-weight: 800;
+        }
+        .logo-caption {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--gray-elegant);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        /* Навигация премиум */
+        .navbar {
+            padding: 20px 0;
+            background: rgba(253, 248, 245, 0.96);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(139, 26, 26, 0.08);
+            transition: all 0.3s;
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links {
+            display: flex;
+            gap: 44px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-elegant);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.25s;
+            letter-spacing: -0.2px;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        .mobile-menu-btn {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--black-rich);
+        }
+
+        /* HERO — благородный, спокойный */
+        .hero {
+            padding: 70px 0 60px;
+        }
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+        .hero-content h1 {
+            font-size: 54px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--black-rich);
+            margin-bottom: 28px;
+        }
+        .hero-content h1 span {
+            color: var(--primary);
+            background: linear-gradient(120deg, #8B1A1A 0%, #B34A4A 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-lead {
+            font-size: 1.2rem;
+            color: var(--gray-elegant);
+            margin-bottom: 40px;
+            max-width: 520px;
+            line-height: 1.5;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 16px 44px;
+            border-radius: var(--border-radius-element);
+            font-weight: 700;
+            font-size: 1rem;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            box-shadow: 0 8px 20px rgba(139, 26, 26, 0.25);
+            letter-spacing: -0.2px;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 30px rgba(139, 26, 26, 0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid rgba(139, 26, 26, 0.4);
+            color: var(--black-rich);
+            padding: 16px 40px;
+            border-radius: var(--border-radius-element);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(139, 26, 26, 0.02);
+        }
+        .hero-image {
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transform: scale(1);
+            transition: 0.5s;
+        }
+        .hero-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Статистика */
+        .stats-section {
+            padding: 20px 0 70px;
+        }
+        .stats-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 80px;
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(139, 26, 26, 0.05);
+        }
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--gray-elegant);
+        }
+
+        /* Общие секции */
+        .section {
+            padding: 90px 0;
+        }
+        .section-light {
+            background: var(--bg-warm);
+        }
+        .section-white {
+            background: white;
+        }
+        .section-title {
+            font-size: 44px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 18px;
+            color: var(--black-rich);
+        }
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-elegant);
+            max-width: 680px;
+            margin-bottom: 56px;
+        }
+
+        /* О донорстве (эмоциональный блок) */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+        .about-image img {
+            border-radius: 32px;
+            box-shadow: var(--shadow-md);
+        }
+        .about-highlight {
+            background: white;
+            border-left: 5px solid var(--primary);
+            padding: 28px 30px;
+            border-radius: 24px;
+            margin-top: 28px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Шаги (воздушные иконки) */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 35px;
+            margin-top: 30px;
+        }
+        .step-card {
+            background: white;
+            border-radius: 28px;
+            padding: 32px 20px;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .step-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(139, 26, 26, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 36px;
+            color: var(--primary);
+        }
+        .step-card h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .print-badge {
+            display: inline-block;
+            background: #F0EBE6;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 16px;
+            color: var(--primary);
+        }
+
+        /* Выплаты (финтех-стиль) */
+        .payments-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .payment-card {
+            background: white;
+            border-radius: 32px;
+            padding: 32px;
+            transition: 0.25s;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(139,26,26,0.05);
+        }
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        .payment-icon {
+            font-size: 40px;
+            margin-bottom: 18px;
+        }
+        .payment-amount {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 12px 0 10px;
+        }
+
+        /* Льготы */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        .benefit-card {
+            background: var(--bg-warm);
+            border-radius: 28px;
+            padding: 32px 20px;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid rgba(139,26,26,0.1);
+        }
+        .benefit-icon {
+            width: 72px;
+            height: 72px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Премиальная форма */
+        .form-section {
+            background: linear-gradient(115deg, #1A120B 0%, #2C241E 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .form-wrapper {
+            max-width: 680px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 48px;
+            padding: 56px 52px;
+            box-shadow: 0 40px 70px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+        .form-control, .form-select {
+            width: 100%;
+            padding: 16px 22px;
+            border: 1.5px solid #EAE3DD;
+            border-radius: 28px;
+            font-size: 1rem;
+            transition: 0.2s;
+            background: white;
+        }
+        .form-control:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139,26,26,0.1);
+        }
+        .btn-submit {
+            background: var(--primary);
+            width: 100%;
+            padding: 18px;
+            border-radius: 44px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border-radius: 24px;
+            padding: 24px 30px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .faq-answer {
+            margin-top: 20px;
+            color: var(--gray-elegant);
+            display: none;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Футер */
+        .footer {
+            background: var(--black-rich);
+            padding: 56px 0 36px;
+            color: #E8E0D8;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .footer-email a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .steps-grid, .payments-grid, .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .steps-grid, .payments-grid, .benefits-grid, .stats-grid {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+            .stats-grid { padding: 30px; border-radius: 48px; }
+            .container { padding: 0 24px; }
+            .form-wrapper { padding: 40px 28px; }
+            .hero-content h1 { font-size: 40px; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+        /* cookie */
+        .cookie-consent {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            z-index: 9999;
+            box-shadow: var(--shadow-md);
+            border-left: 6px solid var(--primary);
+        }
+        .btn-cookie {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .hidden { display: none; }
+        .mobile-menu-active .nav-links {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            border-radius: 28px;
+            margin: 0 20px;
+            text-align: center;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="cookie-consent" id="cookieConsent">
+    <div class="cookie-text">👋 Продолжая, вы соглашаетесь с <a href="policy.html">политикой конфиденциальности</a> и <a href="terms.html">пользовательским соглашением</a>.</div>
+    <button class="btn-cookie" onclick="acceptCookies()">Принять</button>
+</div>
+
+<nav class="navbar">
+    <div class="container">
+        <a href="#" class="logo-premium">
+            <div class="logo-symbol"></div>
+            <div class="logo-text">
+                <span class="mir">МИР</span> <span class="donors">ДОНОРОВ</span>
+                <div class="logo-caption">надёжный сервис донорства</div>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="#about">О донорстве</a><a href="#how">Как это работает</a><a href="#payments">Выплаты</a>
+            <a href="#benefits">Льготы</a><a href="#faq">Вопросы</a><a href="#register">Запись</a>
+        </div>
+        <div class="mobile-menu-btn" id="mobileMenuBtn">☰</div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Стань донором крови — <span>спаси жизнь</span><br>и получи до 12 155 ₽</h1>
+            <p class="hero-lead">Каждый день больницы ждут вашу помощь. Прозрачные выплаты, забота о донорах и статус почётного героя.</p>
+            <div class="hero-buttons" style="display: flex; gap: 18px;">
+                <a href="#register" class="btn-primary">Записаться онлайн</a>
+                <a href="#about" class="btn-outline">Узнать больше</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://s10.iimage.su/s/13/gpCCIoSxjGttznsXsYrQT0Y3EIjtvdHSiA7B7Dls5.webp" alt="Счастливый донор в современном центре">
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-item"><div class="stat-number" id="stat1">0</div><div class="stat-label">активных доноров</div></div>
+            <div class="stat-item"><div class="stat-number" id="stat2">0</div><div class="stat-label">клиник-партнёров</div></div>
+            <div class="stat-item"><div class="stat-number" id="stat3">0</div><div class="stat-label">спасённых жизней</div></div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-light" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-image"><img src="https://s10.iimage.su/s/13/gfCj6eyx5U6FyUeN6ZFcbD3qrsW86twwuGjL0Bjk3.jpg" alt="Объединённые радостью"></div>
+            <div class="about-content">
+                <h2 class="section-title" style="font-size:44px;">Зачем становиться донором?</h2>
+                <p>Каждые 30 секунд в мире кому-то требуется переливание. В Москве ежедневно нужны доноры для пациентов с онкологией, после тяжёлых операций.</p>
+                <p>Ваша кровь может спасти до трёх человек. Мы создали систему, где вы получаете достойные выплаты, выходные дни и чувство глубокой благодарности.</p>
+                <div class="about-highlight"><p>❤️ Вы помогаете и получаете: денежные выплаты, 2 оплачиваемых выходных, льготы и статус почётного донора России.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-white" id="how">
+    <div class="container">
+        <h2 class="section-title">Как это работает</h2>
+        <p class="section-subtitle">Прозрачный путь: от заявки до выплаты</p>
+        <div class="steps-grid">
+            <div class="step-card"><div class="step-icon">📱</div><h4>Заполните форму</h4><p>2 минуты — укажите данные и выберите больницу</p></div>
+            <div class="step-card"><div class="step-icon">📄</div><h4>Скачайте бланк</h4><p>PDF с уникальным номером. Обязательно распечатайте</p><span class="print-badge">🖨️ Распечатать обязательно</span></div>
+            <div class="step-card"><div class="step-icon">🏥</div><h4>Придите в центр</h4><p>Паспорт + распечатанный бланк. Бесплатное обследование</p></div>
+            <div class="step-card"><div class="step-icon">💳</div><h4>Получите выплату</h4><p>Деньги в день сдачи + справка на 2 выходных</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-light" id="payments">
+    <div class="container">
+        <h2 class="section-title">Выплаты донорам в Москве (2026)</h2>
+        <p class="section-subtitle">Суммы обновлены постановлением № 123-ФЗ. Честно и без задержек.</p>
+        <div class="payments-grid">
+            <div class="payment-card"><div class="payment-icon">🩸</div><h3>Цельная кровь</h3><div class="payment-amount">2 778 ₽</div><p>редкий фенотип + компенсация питания</p></div>
+            <div class="payment-card"><div class="payment-icon">💧</div><h3>Плазма</h3><div class="payment-amount">5 209 ₽</div><p>600 мл, помощь при ожогах и травмах</p></div>
+            <div class="payment-card"><div class="payment-icon">🧬</div><h3>Тромбоциты</h3><div class="payment-amount">12 155 ₽</div><p>критически важно для онкологии</p></div>
+            <div class="payment-card"><div class="payment-icon">🔴</div><h3>Эритроциты</h3><div class="payment-amount">8 682 ₽</div><p>при анемии, кровопотерях</p></div>
+            <div class="payment-card"><div class="payment-icon">📊</div><h3>4 донации крови</h3><div class="payment-amount">24 000 ₽</div><p>единоразово накопительно</p></div>
+            <div class="payment-card"><div class="payment-icon">⭐</div><h3>15 плазмы / 10 тромбоцитов</h3><div class="payment-amount">62 400 ₽</div><p>дополнительное поощрение</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-white" id="benefits">
+    <div class="container">
+        <h2 class="section-title">Дополнительные льготы</h2>
+        <p class="section-subtitle">Государственная поддержка для доноров</p>
+        <div class="benefits-grid">
+            <div class="benefit-card"><div class="benefit-icon">📅</div><h4>2 выходных дня</h4><p>с сохранением зарплаты</p></div>
+            <div class="benefit-card"><div class="benefit-icon">🏞️</div><h4>Льготные путёвки</h4><p>вне очереди в санаторий</p></div>
+            <div class="benefit-card"><div class="benefit-icon">⚕️</div><h4>Внеочередное лечение</h4><p>в гос. клиниках</p></div>
+            <div class="benefit-card"><div class="benefit-icon">🌟</div><h4>Почётный донор</h4><p>ежегодная выплата 19 497 ₽</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="form-section" id="register">
+    <div class="container">
+        <div class="form-wrapper">
+            <h2 style="font-size: 38px;">Запись на донацию</h2>
+            <p class="lead" style="margin-bottom: 32px;">Заполните анкету — мы подготовим направление</p>
+            <form id="donorForm">
+                <div class="form-group"><label>Ваше полное имя</label><input type="text" class="form-control" id="name" placeholder="Иванов Иван Иванович" required></div>
+                <div class="form-group"><label>Телефон</label><input type="tel" class="form-control" id="phone" placeholder="+7 (999) 123-45-67" required></div>
+                <div class="form-group"><label>Email</label><input type="email" class="form-control" id="email" placeholder="ivan@example.ru" required></div>
+                <div class="form-group"><label>Группа крови (если знаете)</label><select class="form-select" id="bloodType"><option value="">Не знаю</option><option>0(I) Rh+</option><option>0(I) Rh-</option><option>A(II) Rh+</option><option>A(II) Rh-</option><option>B(III) Rh+</option><option>B(III) Rh-</option><option>AB(IV) Rh+</option><option>AB(IV) Rh-</option></select></div>
+                <div class="form-group"><label>Выберите больницу</label><select class="form-select" id="hospital" required><option value="">Выберите...</option><option value="1">НМИЦ ДГОИ им. Рогачёва</option><option value="2">Центр крови ФМБА</option><option value="3">НМИЦ гематологии</option><option value="4">РДКБ</option><option value="5">ГКБ №1 им. Пирогова</option></select></div>
+                <button type="submit" class="btn-submit">Получить направление →</button>
+                <p class="form-note" style="text-align:center; margin-top:20px;">Нажимая, вы соглашаетесь на обработку данных</p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="section section-light" id="faq">
+    <div class="container">
+        <h2 class="section-title">Часто задаваемые вопросы</h2>
+        <div class="faq-grid">
+            <div class="faq-item"><div class="faq-question">Сколько платят за кровь в Москве?<span>▼</span></div><div class="faq-answer">За цельную кровь (редкий фенотип) — 2 778 ₽, за плазму — 5 209 ₽, тромбоциты — 12 155 ₽, эритроциты — 8 682 ₽.</div></div>
+            <div class="faq-item"><div class="faq-question">Как стать почётным донором?<span>▼</span></div><div class="faq-answer">40 донаций крови или 60 плазмы. Ежегодная выплата 19 497 ₽, льготы, внеочередное обслуживание.</div></div>
+            <div class="faq-item"><div class="faq-question">Что взять с собой на донацию?<span>▼</span></div><div class="faq-answer">Паспорт и распечатанное направление. Лёгкий завтрак, за сутки без жирного и алкоголя.</div></div>
+            <div class="faq-item"><div class="faq-question">Как часто можно сдавать кровь?<span>▼</span></div><div class="faq-answer">Мужчинам до 5 раз в год, женщинам до 4. Интервал 60 дней.</div></div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo" style="display:flex; gap:10px;"><span style="font-size:28px;">🩸</span><strong style="font-size:1.4rem;">МИР ДОНОРОВ</strong></div>
+            <div class="footer-info"><div class="footer-email">📧 <a href="mailto:neurosprint.team@gmail.com">neurosprint.team@gmail.com</a></div><div class="footer-links" style="margin-top:12px;"><a href="policy.html" style="color:#E8E0D8; margin-right:24px;">Политика</a><a href="terms.html" style="color:#E8E0D8;">Соглашение</a></div></div>
+        </div>
+        <div class="footer-bottom" style="margin-top:48px; text-align:center; font-size:0.8rem;">© 2026 МИР ДОНОРОВ. Премиальный сервис донорства крови.</div>
+    </div>
+</footer>
+
+<script>
+    function acceptCookies() { document.getElementById('cookieConsent').classList.add('hidden'); localStorage.setItem('cookiesAccepted', 'true'); }
+    if(localStorage.getItem('cookiesAccepted')==='true') document.getElementById('cookieConsent')?.classList.add('hidden');
+
+    const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{ if(entry.isIntersecting){ animateNumbers(); observer.unobserve(entry.target); } });
+    },{threshold:0.3});
+    const statsGrid=document.getElementById('statsGrid');
+    if(statsGrid) observer.observe(statsGrid);
+
+    function animateNumbers(){
+        const targets=[4850, 18, 11200];
+        const els=[document.getElementById('stat1'),document.getElementById('stat2'),document.getElementById('stat3')];
+        targets.forEach((t,i)=>{
+            let curr=0, step=Math.ceil(t/45);
+            let timer=setInterval(()=>{ curr+=step; if(curr>=t){ els[i].innerText=t+(i!==1?'+':''); clearInterval(timer);} else els[i].innerText=curr+(i!==1?'+':''); },28);
+        });
+    }
+
+    document.querySelectorAll('.faq-item').forEach(i=>{ i.addEventListener('click',()=> i.classList.toggle('active')); });
+
+    function getPartnerFromCookies(){ try{ let c=document.cookie.split('; ').find(r=>r.startsWith('partner=')); if(c) return JSON.parse(decodeURIComponent(c.split('=')[1])); }catch(e){} return null; }
+
+    document.getElementById('donorForm').addEventListener('submit',function(e){
+        e.preventDefault();
+        const formData={ id:'ДН-'+Date.now().toString().slice(-8)+'-'+Math.floor(Math.random()*999).toString().padStart(3,'0'), date:new Date().toLocaleString('ru-RU'), name:document.getElementById('name').value, phone:document.getElementById('phone').value, email:document.getElementById('email').value, bloodType:document.getElementById('bloodType').value||'Не указана', hospital:document.getElementById('hospital').options[document.getElementById('hospital').selectedIndex]?.text||'', hospitalId:document.getElementById('hospital').value, partner:getPartnerFromCookies()?.ref||'direct', status:'Ожидание' };
+        let donors=JSON.parse(localStorage.getItem('mirDonors')||'[]'); donors.push(formData); localStorage.setItem('mirDonors',JSON.stringify(donors));
+        window.location.href=`blank.html?id=${formData.id}&hospital=${formData.hospitalId}`;
+    });
+
+    const mobileBtn=document.getElementById('mobileMenuBtn'); const nav=document.querySelector('.navbar');
+    mobileBtn?.addEventListener('click',()=>{ nav.classList.toggle('mobile-menu-active'); });
+    window.addEventListener('click',(e)=>{ if(nav.classList.contains('mobile-menu-active') && !nav.contains(e.target) && e.target!==mobileBtn) nav.classList.remove('mobile-menu-active'); });
+</script>
+</body>
+</html>
